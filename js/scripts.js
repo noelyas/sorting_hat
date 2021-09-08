@@ -6,9 +6,33 @@ class Pregunta {
         this.op2 = opcion2;
     }
 
-    preguntar(){
-        const QUESTION = prompt(this.op1 + " or " + this.op2 + "?","0");
-        return QUESTION;
+    preguntar(id){
+        
+        const question = document.createElement('div');
+        const qTitle = document.createElement('h2');
+        qTitle.textContent = `Pregunta ${id}`;
+        question.appendChild(qTitle);
+        const opciones = [];
+        opciones[0] = this.op1;
+        opciones[1] = this.op2;
+
+        for (let i = 0; i < 2; i++) {
+
+            const radio = document.createElement('input');
+            const label = document.createElement('label');
+            radio.setAttribute('type', 'radio');
+            radio.setAttribute('name', `q-${id}`);
+            radio.value = i+1;
+            label.textContent = opciones[i];
+
+            question.appendChild(radio);
+            question.appendChild(label);
+
+        }
+        
+        const questions = document.getElementById("questions");
+        questions.appendChild(question);
+
     }
 
     imprimir(){
@@ -18,33 +42,66 @@ class Pregunta {
 
 }
 
-const NOMBRE = prompt("Ingresá tu nombre","Nombre");
 
-// Creo un array para almacenar las respuestas del usuario
-const RESPUESTAS = [];
 
 // Creo el array para la primera pregunta y le almaceno las tres instancias de la clase Pregunta
 const pregunta1 = [];
-pregunta1.push(new Pregunta("Dawn (1)", "Dusk (2)"));
-pregunta1.push(new Pregunta("Forest (1)", "River (2)"));
-pregunta1.push(new Pregunta("Moon (1)", "Stars (2)"));
+pregunta1.push(new Pregunta("Dawn", "Dusk"));
+pregunta1.push(new Pregunta("Forest", "River"));
+pregunta1.push(new Pregunta("Moon", "Stars"));
 const q1 = Math.floor(Math.random() * 3);
 // Llamo al método preguntar() con un número al azar q1  y guardo la respuesta en el array
-const r1 = pregunta1[q1].preguntar();
-RESPUESTAS.push(r1);
+pregunta1[q1].preguntar(1);
+
 
 // Creo el array para la segunda pregunta y le almaceno las tres instancias de la clase Pregunta
 const pregunta2 = [];
-pregunta2.push(new Pregunta("Black (1)", "White (2)"));
-pregunta2.push(new Pregunta("Heads (1)", "Tails (2)"));
-pregunta2.push(new Pregunta("Left (1)", "Right (2)"));
+pregunta2.push(new Pregunta("Black", "White"));
+pregunta2.push(new Pregunta("Heads", "Tails"));
+pregunta2.push(new Pregunta("Left", "Right"));
 const q2 = Math.floor(Math.random() * 3);
 // Llamo al método preguntar() con un número al azar q2 y guardo la respuesta en el array
-const r2 = pregunta2[q2].preguntar();
-RESPUESTAS.push(r2);
+pregunta2[q2].preguntar(2);
+
+const btnSort = document.getElementById('sort');
+btnSort.onclick = getAnswers;
+
+
+function getAnswers() {
+
+    const nombre = document.getElementById('input-name');
+
+    const radio1 = document.getElementsByName('q-1');
+    const radio2 = document.getElementsByName('q-2');
+
+    // Creo un array para almacenar las respuestas del usuario
+    const respuestas = [];
+    respuestas.push(checkedRadio(radio1));
+    respuestas.push(checkedRadio(radio2));
+
+    sortingHat(respuestas,q1,q2,nombre.value)
+
+}
+
+function checkedRadio(radio){
+
+    let val = 0;
+
+    for (let i = 0; i < radio.length; i++){
+
+        if(radio[i].checked){
+            val = radio[i].value;
+        }
+
+    }
+
+    return val;
+
+}
+
 
 // Función que determina la casa a la que pertenece el usuario
-function sortingHat(arr,p1,p2){
+function sortingHat(arr,p1,p2,nombre){
 
     // variables de cada casa para sumar puntos de acuerdo a las respuestas
     let gryff = 0;
@@ -149,7 +206,7 @@ function sortingHat(arr,p1,p2){
         { name:'Gryffindor', value: gryff },
         { name:'Ravenclaw', value: raven },
         { name:'Hufflepuff', value: huff },
-        { name:'Slyterin', value: sly }
+        { name:'Slytherin', value: sly }
     ];
     // Ordeno el array de forma descendente    
     HOUSES.sort((a,b)=>b.value-a.value);
@@ -162,16 +219,20 @@ function sortingHat(arr,p1,p2){
     // Defino la casa del usuario
     if(HOUSES[0].value == HOUSES[1].value){ // si las primeras dos posiciones tienen el mismo puntaje, se define al azar
         const RANDOM = Math.floor(Math.random() * 2);
-        resultado = NOMBRE + ", tu casa de Hogwarts es: "+HOUSES[RANDOM].name;
+        resultado = nombre + ", tu casa de Hogwarts es: "+HOUSES[RANDOM].name.toUpperCase();
     } else { // si no, su casa es la que tiene el mayor puntaje
-        resultado = NOMBRE + ", tu casa de Hogwarts es: "+HOUSES[0].name;
+        resultado = nombre + ", tu casa de Hogwarts es: "+HOUSES[0].name.toUpperCase();
     }
+
     // Devuelvo el resultado
-    return resultado;
+    const res = document.getElementById('resultado');
+    res.innerHTML = resultado;
     
 }
 
-const SORTED = sortingHat(RESPUESTAS,q1,q2);
+//const SORTED = sortingHat(RESPUESTAS,q1,q2);
+
+
 // Imprimo el resultado por consola y lo inserto en el div
-console.log(SORTED);
-document.getElementById("contenedor").innerHTML += SORTED;
+//console.log(SORTED);
+//document.getElementById("contenedor").innerHTML += SORTED;
