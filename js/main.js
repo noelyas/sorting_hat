@@ -1,226 +1,94 @@
-// Creo la clase con su constructor y el método preguntar
+// Almaceno las respuestas seleccionadas que se encuentran en el Local Storage
 
-class Question {
+let answersFromStorage = JSON.parse(localStorage.getItem('answers'));
 
-    constructor (id, question, options) {
+// Si el LocalStorage no tiene nada almacenado, inicializo un array
 
-        this.id = id;
-        this.question = question;
-        this.options = [];
+if (!answersFromStorage) {
 
-        for(const option of options) {
-           
-            this.options.push(option);
-
-        }
-
-    }
-
-    ask(n,pregunta,qId) {
-
-        const question = document.createElement('div');
-        const qTitle = document.createElement('h2');
-        qTitle.textContent = pregunta[qId].question;
-        question.appendChild(qTitle);
-
-        const opciones = pregunta[qId].options;
-
-        for (let i = 0; i < opciones.length; i++) {
-
-            const radio = document.createElement('input');
-            const label = document.createElement('label');
-            radio.setAttribute('type', 'radio');
-            radio.setAttribute('name', `q-${n}`);
-            radio.value = opciones[i].toLowerCase();
-            label.textContent = opciones[i];
-
-            question.appendChild(radio);
-            question.appendChild(label);
-
-        }
-        
-        const containerQuestion = document.getElementById("questions");
-        containerQuestion.appendChild(question);
-
-    }     
+    answersFromStorage = [];
 
 }
 
+// Almaceno el nombre del usuario que se encuentra en el LS
 
-// Creo las preguntas, que se guardan en el array questions
+let nameFromStorage = localStorage.getItem('userName');
+
+// Si el LocalStorage no tiene nada almacenado, inicializo string vacío 
+
+if (!nameFromStorage) {
+
+    nameFromStorage = '';
+
+}
+
+// Creo las preguntas con la función createQuestion, que se guardan en el array questions
 
 const questions = [];
 
-createQuestion('Elegí la opción',set1);
-createQuestion('Elegí la opción',set2);
+createQuestion(set1);
+createQuestion(set2);
+createQuestion(set3);
 
 
-// Invoco al método preguntar de la clase Question tantas veces como haya preguntas en el array questions
+// Invoco al método ask de la clase Question tantas veces como haya preguntas en el array questions
 
-let n = 0;
+let orden = 0;
 
 for (const pregunta of questions) {
 
-    n++;
+    orden++;
 
-    // Elijo un número random entre la cantidad preguntas posibles por set
+    if( answersFromStorage.length == 0 ){
 
-    const qId = Math.floor(Math.random() * pregunta.length);
+        // Si NO hay respuestas en el Local Storage
 
-    // Llamo al método ask que arma la pregunta y la muestra en pantalla
+        // Elijo un número random entre la cantidad preguntas posibles por set de preguntas
 
-    pregunta[qId].ask(n,pregunta,qId);
+        const idRandom = Math.floor(Math.random() * pregunta.length);
+
+        // Llamo al método ask que arma la pregunta y la muestra en pantalla
+
+        pregunta[idRandom].ask(orden,pregunta,idRandom); 
+
+    } else {
+
+        // Si HAY respuestas en el Local Storage
+
+        // En todos los casos utilizo orden-1 porque el orden va de 1 a n y el array de 0 a n
+
+        if(answersFromStorage[orden-1]==null){
+
+            // Si la pregunta no se respondió antes de recargar la página, tengo que crearla de manera aleatoria
+
+            const idRandom = Math.floor(Math.random() * pregunta.length);
+            pregunta[idRandom].ask(orden,pregunta,idRandom); 
+            
+        } else {
+
+            // En cambio si la respuesta se almacenó en el Local Storage, tengo que llamar al método con el idRandom que almacené en el LS (para que la pregunta sea la misma que ya respondió y no genere una nueva)
+
+            pregunta[answersFromStorage[orden-1].idRandom].ask(orden,pregunta,answersFromStorage[orden-1].idRandom);   
+        
+        }
+
+    }
 
 }
 
-// Evento del botón Sort
+// Evento click del botón Calcular que llama a la función que obtiene las respuestas
+
 const btnSort = document.getElementById('sort');
 btnSort.onclick = getAnswers;
 
+// Evento click del botón Limpiar que resetea todo el formulario
 
-function getAnswers() {
-
-    // Creo un array para almacenar las respuestas del usuario
-    const respuestas = [];
-
-    const nombre = document.getElementById('input-name');
-
-    for (let i = 1; i < 3; i++){
-
-        const radio = document.getElementsByName('q-'+i);
-
-        respuestas.push(checkedRadio(radio));
-
-    }
-
-    sortingHat(respuestas,nombre.value)
-
-}
-
-// Función que devuelve el valor seleccionado del radio
-
-function checkedRadio(radio){
-
-    let val = 0;
-
-    for (let i = 0; i < radio.length; i++){
-
-        if(radio[i].checked){
-            val = radio[i].value;
-        }
-
-    }
-
-    return val;
-
-}
+const btnClear = document.getElementById('clear');
+btnClear.onclick = clearAll;
 
 
-// Función que determina la casa a la que pertenece el usuario
-function sortingHat(answers,nombre){
+// Evento blur del input-name que llama a la función que almacena el nombre del usuario
 
-    // variables de cada casa para sumar puntos de acuerdo a las respuestas
-    let gryff = 0;
-    let raven = 0;
-    let huff = 0;
-    let sly = 0;
-
-    // Recorro el array de respuestas y le sumo puntos a las casas de acuerdo a las opciones elegidas
-
-    for (let i = 0; i < answers.length; i++){
-
-        switch(answers[i]){
-
-            case 'amanecer':
-                gryff++;
-                raven++;
-                break;
-
-            case 'atardecer':
-                huff++;
-                sly++;
-                break;
-
-            case 'bosque':
-                gryff++;
-                raven++;
-                break;
-
-            case 'río':
-                huff++;
-                sly++;
-                break;
-
-            case 'luna':
-                raven++;
-                sly++;
-                break;
-
-            case 'estrellas':
-                gryff++;
-                huff++;
-                break;
-
-            case 'blanco':
-                raven++;
-                huff++;
-                break;
-
-            case 'negro':
-                gryff++;
-                sly++;
-                break;
-
-            case 'cara':
-                raven++;
-                huff++;
-                break;
-
-            case 'seca':
-                gryff++;
-                sly++;
-                break;
-
-            case 'izquierda':
-                raven++;
-                sly++;
-                break;
-
-            case 'derecha':
-                gryff++;
-                huff++;
-                break;
-
-        }
-
-    }
-
-    // Creo un array con los puntos de cada casa
-    const HOUSES = [
-        { name:'Gryffindor', value: gryff },
-        { name:'Ravenclaw', value: raven },
-        { name:'Hufflepuff', value: huff },
-        { name:'Slytherin', value: sly }
-    ];
-
-    // Ordeno el array de forma descendente    
-    HOUSES.sort((a,b)=>b.value-a.value);
-
-    // Muestro el array ordenado por consola
-    console.log(HOUSES);
-
-    let resultado = "";
-
-    // Defino la casa del usuario
-    if(HOUSES[0].value == HOUSES[1].value){ // si las primeras dos posiciones tienen el mismo puntaje, se define al azar
-        const RANDOM = Math.floor(Math.random() * 2);
-        resultado = nombre + ", tu casa de Hogwarts es: "+HOUSES[RANDOM].name.toUpperCase();
-    } else { // si no, su casa es la que tiene el mayor puntaje
-        resultado = nombre + ", tu casa de Hogwarts es: "+HOUSES[0].name.toUpperCase();
-    }
-
-    // Devuelvo el resultado
-    const res = document.getElementById('resultado');
-    res.innerHTML = resultado;
-
-}
+const inputName = document.getElementById('input-name');
+inputName.onblur = saveName;
+inputName.value = nameFromStorage;

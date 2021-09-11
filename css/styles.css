@@ -1,0 +1,132 @@
+* {
+
+    margin:0;
+    padding:0;
+
+}
+
+body {
+
+    font-family: 'Roboto Mono', monospace;
+
+}
+
+header {
+
+    background-color: rgb(23, 23, 49);
+    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+
+}
+
+header h1 {
+
+    font-size: 1.5em;
+
+}
+
+main {
+
+    background-color:rgb(169, 169, 233);
+    height: 86vh;
+    padding:2% 5%;
+
+}
+
+label {
+
+    font-size:1em;
+
+}
+
+#name, .question {
+
+    padding:12px 8px;
+}
+
+#input-name {
+
+    background: transparent;
+    padding: 5px 8px;
+    border: 2px solid rgb(23 23 49);
+    border-radius: 4px;
+    font-size: 1em;
+
+}
+
+.question h2 {
+
+    font-size:1em;
+    margin-bottom:8px;
+
+}
+
+.question div {
+
+    margin-bottom: 5px;
+
+}
+
+.question div label {
+
+    padding-left:10px;
+
+}
+
+#sort, #clear {
+
+    font-weight: bold;
+    font-size:1em;
+    padding: 1% 4%;
+    border:none;
+    margin-top:15px;
+
+}
+
+#sort {
+
+    background-color: rgb(23, 23, 49);
+    color: white;
+
+}
+
+#clear {
+
+    background-color: transparent;
+    color: rgb(23, 23, 49);
+    border: 2px solid rgb(23, 23, 49);
+
+}
+
+#resultado {
+
+    margin-top:30px;
+
+}
+
+.slytherin {
+
+    color: rgb(15, 90, 15);
+
+}
+
+.gryffindor {
+
+    color: rgb(129, 22, 22);
+
+}
+
+.hufflepuff {
+
+    color: gold;
+
+}
+
+.ravenclaw {
+
+    color: rgb(34, 34, 219);
+
+}

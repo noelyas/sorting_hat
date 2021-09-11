@@ -4,21 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <title>Sombrero Seleccionador - Versión 0.1</title>
 </head>
 <body>
-    <h1>Sombrero Seleccionador</h1>
+    <header>
+
+        <h1>Sombrero Seleccionador</h1>
+
+    </header>
+
+    <main>
+        <div id="name">
+            <label>Ingresá tu nombre</label>
+            <input type="text" id="input-name" autocomplete="off">
+        </div>
+        <div id="questions"></div>
+        <button id="sort">Calcular</button>
+        <button id="clear">Limpiar</button>
+        <div id="resultado"></div>
+
+    </main>
     
-    <label>Nombre</label>
-    <input type="text" id="input-name">
-    <div id="questions"></div>
-    <br>
-    <button id="sort">Sort</button>
-    <br>
-    <br>
-    <div id="resultado"></div>
-    
-    <script src="js/crud.js"></script>
+    <script src="js/classes.js"></script>
+    <script src="js/functions.js"></script>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
 </body>
