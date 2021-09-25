@@ -1,0 +1,17 @@
+[
+  	{
+		"0": ["Elegí la opción", "Amanecer", "Atardecer"],
+		"1": ["Elegí la opción", "Bosque", "Río"],
+		"2": ["Elegí la opción", "Luna", "Estrellas"]
+	},
+	{
+		"0": ["Elegí la opción", "Negro", "Blanco"],
+		"1": ["Elegí la opción", "Cara", "Seca"],
+		"2": ["Elegí la opción", "Izquierda", "Derecha"]
+	},
+	{
+		"0": ["¿Cuál de las siguientes opciones odiarías más que la gente te llamara?", "Ordinario", "Ignorante", "Cobarde", "Egoista"],
+		"1": ["Después de tu muerte ¿qué es lo que más te gustaría que hiciera la gentecuando escuche tu nombre?", "Te extraña, pero sonríe", "Pide mas historias sobre tus aventuras", "Piensa con admiración tus logros", "No me importa lo que la gente piense de mí después de mi muerte, es lo que piensan de mi mientras estoy vivo lo que cuenta"],
+		"2": ["¿Cómo te gustaría ser conocido en la historia?", "El sabio", "El bueno", "El grande", "El audaz"]
+	}
+]

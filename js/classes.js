@@ -92,7 +92,9 @@ class Question {
             }
             // Función que almacena la opción clickeada de la pregunta en el Local Storage
             radio.onclick = () => {
+                
                 addAnswer(radio.name,radio.value,idRandom);
+
             }
 
         }

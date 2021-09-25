@@ -26,55 +26,91 @@ if (!nameFromStorage) {
 
 const questions = [];
 
-createQuestion(set1);
-createQuestion(set2);
-createQuestion(set3);
+//console.log(group1);
+/*createQuestion(group1);
+createQuestion(group2);
+createQuestion(group3);*/
+
+const URL_ARCHIVO_JSON = 'db/data.json';
+
+window.onload = () => {
+
+    fetch(URL_ARCHIVO_JSON)
+        .then(response => response.json())
+        .then(data => {
+
+            for (let i = 0; i < data.length; i++){
+
+                createQuestion(Object.values(data[i]));
+                
+            }
+
+            // Ordeno el array de objetos por nombre
+
+            answersFromStorage.sort(function (a, b) {
+
+                if (a.name > b.name) {
+                return 1;
+                }
+                if (a.name < b.name) {
+                return -1;
+                }
+                // a debe ser igual a b
+                return 0;
+
+            });
 
 
-// Invoco al método ask de la clase Question tantas veces como haya preguntas en el array questions
+            // Invoco al método ask de la clase Question tantas veces como haya preguntas en el array questions
 
-let orden = 0;
+            let orden = 0;
 
-for (const pregunta of questions) {
+            for (const pregunta of questions) { 
 
-    orden++;
+                orden++;
 
-    if( answersFromStorage.length == 0 ){
+                if( answersFromStorage.length == 0 ){
 
-        // Si NO hay respuestas en el Local Storage
+                    // Si NO hay respuestas en el Local Storage
 
-        // Elijo un número random entre la cantidad preguntas posibles por set de preguntas
+                    // Elijo un número random entre la cantidad preguntas posibles por set de preguntas
 
-        const idRandom = Math.floor(Math.random() * pregunta.length);
+                    const idRandom = Math.floor(Math.random() * pregunta.length);
 
-        // Llamo al método ask que arma la pregunta y la muestra en pantalla
+                    // Llamo al método ask que arma la pregunta y la muestra en pantalla
 
-        pregunta[idRandom].ask(orden,pregunta,idRandom); 
+                    pregunta[idRandom].ask(orden,pregunta,idRandom); 
 
-    } else {
+                } else {
 
-        // Si HAY respuestas en el Local Storage
+                    // Si HAY respuestas en el Local Storage
 
-        // En todos los casos utilizo orden-1 porque el orden va de 1 a n y el array de 0 a n
+                    // En todos los casos utilizo orden-1 porque el orden va de 1 a n y el array de 0 a n
 
-        if(answersFromStorage[orden-1]==null){
+                    if(answersFromStorage[orden-1]==null){
 
-            // Si la pregunta no se respondió antes de recargar la página, tengo que crearla de manera aleatoria
+                        // Si la pregunta no se respondió antes de recargar la página, tengo que crearla de manera aleatoria
 
-            const idRandom = Math.floor(Math.random() * pregunta.length);
-            pregunta[idRandom].ask(orden,pregunta,idRandom); 
+                        const idRandom = Math.floor(Math.random() * pregunta.length);
+                        pregunta[idRandom].ask(orden,pregunta,idRandom); 
+                        
+                    } else {
+
+                        // En cambio si la respuesta se almacenó en el Local Storage, tengo que llamar al método con el idRandom que almacené en el LS (para que la pregunta sea la misma que ya respondió y no genere una nueva)
+
+                        pregunta[answersFromStorage[orden-1].idRandom].ask(orden,pregunta,answersFromStorage[orden-1].idRandom);   
+                    
+                    }
+
+                }
+
+            }
+
             
-        } else {
+        })
 
-            // En cambio si la respuesta se almacenó en el Local Storage, tengo que llamar al método con el idRandom que almacené en el LS (para que la pregunta sea la misma que ya respondió y no genere una nueva)
+};
 
-            pregunta[answersFromStorage[orden-1].idRandom].ask(orden,pregunta,answersFromStorage[orden-1].idRandom);   
-        
-        }
-
-    }
-
-}
 
 // Evento click del botón Calcular que llama a la función que obtiene las respuestas
 
@@ -92,3 +128,4 @@ btnClear.onclick = clearAll;
 const inputName = document.getElementById('input-name');
 inputName.onblur = saveName;
 inputName.value = nameFromStorage;
+
