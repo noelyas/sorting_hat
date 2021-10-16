@@ -1,17 +1,24 @@
 [
   	{
-		"0": ["Elegí la opción", "Amanecer", "Atardecer"],
-		"1": ["Elegí la opción", "Bosque", "Río"],
-		"2": ["Elegí la opción", "Luna", "Estrellas"]
-	},
-	{
-		"0": ["Elegí la opción", "Negro", "Blanco"],
-		"1": ["Elegí la opción", "Cara", "Seca"],
-		"2": ["Elegí la opción", "Izquierda", "Derecha"]
+		"0": ["¿Qué preferís?", "Amanecer", "Atardecer"],
+		"1": ["¿Qué preferís?", "Bosque", "Río"],
+		"2": ["¿Qué preferís?", "Luna", "Estrellas"]
 	},
 	{
 		"0": ["¿Cuál de las siguientes opciones odiarías más que la gente te llamara?", "Ordinario", "Ignorante", "Cobarde", "Egoista"],
 		"1": ["Después de tu muerte ¿qué es lo que más te gustaría que hiciera la gentecuando escuche tu nombre?", "Te extraña, pero sonríe", "Pide mas historias sobre tus aventuras", "Piensa con admiración tus logros", "No me importa lo que la gente piense de mí después de mi muerte, es lo que piensan de mi mientras estoy vivo lo que cuenta"],
-		"2": ["¿Cómo te gustaría ser conocido en la historia?", "El sabio", "El bueno", "El grande", "El audaz"]
+		"2": ["¿Cómo te gustaría ser conocido en la historia?", "El sabio", "El bueno", "El grande", "El audaz"],
+		"3": ["Dada la opción, preferirías inventar una poción que garantizara:","Gloria","Sabiduría","Amor","Poder"]
+	},
+	{
+		"0": ["Se colocan cuatro copas ante ti. ¿Qué elegirías para beber?","El líquido espumoso, espumoso y plateado que brilla como si tuviera diamantes molidos","La bebida suave, espesa y de un color púrpura intenso que desprende un delicioso olor a chocolate y ciruelas","El líquido dorado tan brillante que duele la vista y que hace bailar las manchas solares por toda la habitación","El misterioso líquido negro que reluce como tinta y desprende humos que te hacen ver extrañas visiones"],
+		"1": ["¿Qué tipo de instrumento agrada mas a tu oído?","Violin","Tambores","Piano","Trompeta"],
+		"2": ["Entras en un jardín encantado. ¿Qué sería lo más curioso de examinar primero?","El árbol de hojas de plata con manzanas doradas","Las setas rojas gordas que parecen estar hablando entre sí","El estanque burbujeante en cuyas profundidades se arremolina algo luminoso","La estatua del viejo mago con un extraño centelleo en los ojos"],
+		"3": ["Se colocan cuatro cajas ante ti, ¿cuál intentarías abrir?","La caja pequeña de carey adornada con oro, en cuyo interior parece chillar una pequeña criatura","La reluciente caja de color negro azabache con una cerradura y una llave plateadas, marcada con una runa misteriosa que sabes que es la marca de Merlín","El ataúd dorado adornado, de pie sobre patas con garras, cuya inscripción advierte que tanto el conocimiento secreto como la tentación insoportable se encuentran dentro","La pequeña caja de peltre, sencilla y sencilla, con un mensaje rayado que dice: 'Abro sólo para los dignos'"]
+	},
+	{
+		"0": ["¿Qué preferís?", "Negro", "Blanco"],
+		"1": ["¿Qué preferís?", "Cara", "Seca"],
+		"2": ["¿Qué preferís?", "Izquierda", "Derecha"]
 	}
 ]

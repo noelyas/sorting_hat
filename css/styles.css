@@ -5,40 +5,69 @@
 
 }
 
-body {
-
-    font-family: 'Roboto Mono', monospace;
-
-}
-
-header {
-
-    background-color: rgb(23, 23, 49);
-    color:white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100px;
+@font-face {
+    font-family: 'wizard_worldsimplified';
+    src: url('../fonts/wizardworldsimplified-kxr7-webfont.woff2') format('woff2'),
+         url('../fonts/wizardworldsimplified-kxr7-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 
 }
 
-header h1 {
+.neutral {
 
-    font-size: 1.5em;
+    background-color: #372e29;
+    font-family: wizard_worldsimplified;
+    color:#FFF;
+    font-size:2em;
 
 }
 
-main {
+.slytherin {
 
-    background-color:rgb(169, 169, 233);
-    height: 86vh;
-    padding:2% 5%;
+    background-color: #1a472a;
+    font-family: wizard_worldsimplified;
+    color:#aaaaaa;
+    font-size:2em;
+
+}
+
+.gryffindor {
+
+    background-color: #740001;
+    font-family: wizard_worldsimplified;
+    color:#d3a625;
+    font-size:2em;
+
+}
+
+.hufflepuff {
+
+    background-color: #946b2d;
+    font-family: wizard_worldsimplified;
+    color:#f0c75e;
+    font-size:2em;
+
+}
+
+.ravenclaw {
+
+    background-color: #0e1a40;
+    font-family: wizard_worldsimplified;
+    color:#bebebe;
+    font-size:2em;
+
+}
+
+#cover {
+
+    height: 100vh;
 
 }
 
 label {
 
-    font-size:1em;
+    font-size:0.65em;
 
 }
 
@@ -50,83 +79,30 @@ label {
 #input-name {
 
     background: transparent;
-    padding: 5px 8px;
-    border: 2px solid rgb(23 23 49);
+    padding: 0.5% 1%;
+    border: 2px solid #946b2d;
     border-radius: 4px;
-    font-size: 1em;
+    font-size: 0.5em;
+    color:white;
 
 }
 
 .question h2 {
 
-    font-size:1em;
-    margin-bottom:8px;
-
-}
-
-.question div {
-
-    margin-bottom: 5px;
+    font-size:0.7em;
+    color:#f0c75e;
 
 }
 
 .question div label {
 
-    padding-left:10px;
+    padding-left:2%;
+    font-size:0.6em;
 
 }
 
-#sort, #clear {
+.swal2-styled.swal2-confirm {
 
-    font-weight: bold;
-    font-size:1em;
-    padding: 1% 4%;
-    border:none;
-    margin-top:15px;
-
-}
-
-#sort {
-
-    background-color: rgb(23, 23, 49);
-    color: white;
-
-}
-
-#clear {
-
-    background-color: transparent;
-    color: rgb(23, 23, 49);
-    border: 2px solid rgb(23, 23, 49);
-
-}
-
-#resultado {
-
-    margin-top:30px;
-
-}
-
-.slytherin {
-
-    color: rgb(15, 90, 15);
-
-}
-
-.gryffindor {
-
-    color: rgb(129, 22, 22);
-
-}
-
-.hufflepuff {
-
-    color: gold;
-
-}
-
-.ravenclaw {
-
-    color: rgb(34, 34, 219);
+    background-color: #6c757d !important;
 
 }

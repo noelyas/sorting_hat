@@ -26,11 +26,6 @@ if (!nameFromStorage) {
 
 const questions = [];
 
-//console.log(group1);
-/*createQuestion(group1);
-createQuestion(group2);
-createQuestion(group3);*/
-
 const URL_ARCHIVO_JSON = 'db/data.json';
 
 window.onload = () => {
@@ -106,16 +101,18 @@ window.onload = () => {
 
             }
 
+            const btnEnter = document.getElementById('enter');
+            btnEnter.onclick = showTest;
+
             
         })
-
 };
 
 
 // Evento click del botón Calcular que llama a la función que obtiene las respuestas
 
 const btnSort = document.getElementById('sort');
-btnSort.onclick = getAnswers;
+btnSort.onclick = validateForm;
 
 // Evento click del botón Limpiar que resetea todo el formulario
 
@@ -128,4 +125,3 @@ btnClear.onclick = clearAll;
 const inputName = document.getElementById('input-name');
 inputName.onblur = saveName;
 inputName.value = nameFromStorage;
-

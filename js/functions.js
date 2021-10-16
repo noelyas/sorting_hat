@@ -1,5 +1,17 @@
 /* Funciones */
 
+// Función que muestra el test y oculta la portada
+
+const showTest = () => {
+
+    const cover = document.getElementById('cover');
+    cover.classList.add('d-none');
+
+    const test = document.getElementById('test');
+    test.classList.remove('d-none');
+
+}
+
 // Función que recibe un array de n preguntas y crea una instancia de la clase Question por cada pregunta del set
 
 const createQuestion = (arrayQuestions) => {
@@ -100,6 +112,60 @@ const checkedRadio = (radio) => {
     }
 
     return val;
+
+}
+
+// Función que valida el formulario
+
+const validateForm = () => {
+
+    let valid = true;
+
+    let x = 0;
+
+    const inputs = document.getElementsByTagName('input');
+
+    for(let i = 0; i<inputs.length; i++){
+        
+        if(inputs[i].type == 'text') {
+
+            if (inputs[i].value == ''){
+
+                valid = false;
+
+            }
+
+        } else {
+
+            if(inputs[i].checked){
+				x++;
+			}
+
+        }
+        
+    }
+
+    if( x<3 ) {
+
+        valid = false;
+
+    }
+    
+    if(valid) {
+
+        getAnswers();
+
+    } else {
+
+        Swal.fire({
+            title: 'Por favor, completá todas las preguntas',
+            width: 600,
+            padding: '1em',
+            icon: 'error',
+            background: '#fff'
+        })
+
+    }
 
 }
 
@@ -254,6 +320,86 @@ const sortingHat = (answers,nombre) => {
             case 'audaz':
                 gryff++;
                 break;
+            
+            case 'gloria':
+                gryff++;
+                break;
+            
+            case 'sabiduría':
+                raven++;
+                break;
+            
+            case 'amor':
+                huff++;
+                break;
+            
+            case 'poder':
+                sly++;
+                break;
+            
+            case 'molidos':
+                raven++;
+                break;
+            
+            case 'ciruelas':
+                huff++;
+                break;
+            
+            case 'habitación':
+                gryff++;
+                break;
+            
+            case 'visiones':
+                sly++;
+                break;
+            
+            case 'violin':
+                sly++;
+                break;
+            
+            case 'tambores':
+                gryff++;
+                break;
+            
+            case 'piano':
+                raven++;
+                break;
+            
+            case 'trompeta':
+                huff++;
+                break;
+            
+            case 'doradas':
+                raven++;
+                break;
+            
+            case 'sí':
+                huff++;
+                break;
+            
+            case 'luminoso':
+                sly++;
+                break;
+            
+            case 'ojos':
+                gryff++;
+                break;
+            
+            case 'criatura':
+                huff++;
+                break;
+            
+            case 'merlín':
+                sly++;
+                break;
+            
+            case 'dentro':
+                raven++;
+                break;
+            
+            case 'dignos':
+                gryff++;
+                break;
 
         }
 
@@ -272,6 +418,7 @@ const sortingHat = (answers,nombre) => {
 
     // Inicializo la variable que va a guardar el resultado
     let resultado = "";
+    let house = "";
 
     // Defino la casa del usuario
     if(HOUSES[0].value == HOUSES[1].value){ 
@@ -279,20 +426,44 @@ const sortingHat = (answers,nombre) => {
         // Si las primeras dos posiciones tienen el mismo puntaje, se define al azar
         
         const RANDOM = Math.floor(Math.random() * 2);
-        resultado = `${nombre}, tu casa de Hogwarts es: <span class="${HOUSES[RANDOM].name.toLowerCase()}">${HOUSES[RANDOM].name.toUpperCase()}</span>`;
+        resultado = `${nombre}, tu casa de Hogwarts es ${HOUSES[RANDOM].name.toUpperCase()}`;
+        house = HOUSES[RANDOM].name.toLowerCase();
     
     } else { 
         
         // Si no, su casa es la que tiene el mayor puntaje
-        
-        resultado = `${nombre}, tu casa de Hogwarts es: <span class="${HOUSES[0].name.toLowerCase()}">${HOUSES[0].name.toUpperCase()}</span>`;
+        // <span class="${HOUSES[RANDOM].name.toLowerCase()}">
+
+        resultado = `${nombre}, tu casa de Hogwarts es ${HOUSES[0].name.toUpperCase()}`;
+        house = HOUSES[0].name.toLowerCase();
     
     }
 
     // Obtengo el div con id resultado y le inserto el resultado para verlo en pantalla
 
-    const containerResult = document.getElementById('resultado');
-    containerResult.innerHTML = resultado;
+    Swal.fire({
+        title: resultado,
+        width: 600,
+        padding: '1em ',
+        imageUrl: 'images/'+house+'.png',
+        imageAlt: 'Custom image',
+        background: '#fff',
+        backdrop: `
+          rgba(255,255,255,0.1)
+          url("images/sparkles.gif")
+          left top
+          no-repeat
+        `
+    })
+
+    const body = document.getElementsByTagName('body');
+    const currentClasses = body[0].classList.value;
+    const currentClass = currentClasses.split(' ');
+    body[0].classList.remove(currentClass[0]);
+    body[0].classList.add(house);
+    
+    /*const containerResult = document.getElementById('resultado');
+    containerResult.innerHTML = resultado;*/
 
 }
 
@@ -327,10 +498,12 @@ const clearAll = () => {
 
     }
 
-    // Elimino el contenido del div results
+    // Reseteo la paleta de colores
 
-    const divResults = document.getElementById('resultado')
-    divResults.textContent = '';
+    const body = document.getElementsByTagName('body');
+    const currentClass = body[0].classList.value;
+    body[0].classList.remove(currentClass);
+    body[0].classList.add('neutral');
    
 
 }
